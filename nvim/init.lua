@@ -1,4 +1,4 @@
--- require 'core.options' -- Load general options
+require 'core.options' -- Load general options
 -- require 'core.keymaps' -- Load general keymaps
 -- require 'core.snippets' -- Custom code snippets
 -- require 'tools.sql-runner'
