@@ -10,4 +10,5 @@ require 'core.keymaps' -- Load general keymaps
 require('lazy').setup({
   require("plugins.themes.gruvbox"),
   require("plugins.neo-tree"),
+  require("plugins.fzf")
 })
