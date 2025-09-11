@@ -1,0 +1,15 @@
+theme = GruvboxDark
+font-family = JetBrainsMono Nerd Font
+font-family = Symbols Nerd Font
+font-synthetic-style = bold
+font-size = 16
+copy-on-select = clipboard
+confirm-close-surface = false
+quit-after-last-window-closed = true
+macos-titlebar-proxy-icon = hidden
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+window-width = 133
+window-height = 60
+
