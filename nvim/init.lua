@@ -11,6 +11,4 @@ require('lazy').setup({
   require("plugins.themes.gruvbox"),
   require("plugins.neo-tree"),
   require("plugins.fzf"),
---  require("plugins.telescope"),
---  require("plugins.telescope-file-browser"),
 })

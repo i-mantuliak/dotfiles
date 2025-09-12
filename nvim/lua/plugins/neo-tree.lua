@@ -8,6 +8,10 @@ return {
   },
   lazy = false, -- neo-tree will lazily load itself
   config = function()
-    visible = true
-  end
+    require('neo-tree').setup({
+--      close_if_last_window = true,
+      
+    })
+
+  end,
 }
