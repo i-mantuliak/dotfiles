@@ -14,6 +14,7 @@ return {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
+    add_blank_line_at_top = true,
     close_if_last_window = true,
     filesystem = {
       window = {
