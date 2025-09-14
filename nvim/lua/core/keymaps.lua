@@ -6,34 +6,47 @@ vim.g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- For conciseness
-local opts = { noremap = true, silent = true }
+local default_opts = { noremap = true, silent = true }
 
-vim.keymap.set('n', '<leader>e', ':Neotree <CR>', opts)
+-- Map opts arguments
+local function map(mode, lhs, rhs, desc)
+  local opts = vim.tbl_extend("force", default_opts, { desc = desc })
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
 
 -- delete single character without copying into register
-vim.keymap.set('n', 'x', '"_x', opts)
+vim.keymap.set('n', 'x', '"_x', default_opts)
 
--- Fzf keymaps
-vim.keymap.set('n', '<leader>sf', ':FzfLua files <CR>', opts)
-vim.keymap.set('n', '<leader>sg', ':FzfLua lgrep_curbuf<CR>', opts)
-vim.keymap.set('n', '<leader>ss', ':FzfLua live_grep<CR>', opts)
+-- Old Fzf keymaps
+-- vim.keymap.set('n', '<leader>sf', ':FzfLua files <CR>', default_opts)
+-- vim.keymap.set('n', '<leader>sg', ':FzfLua lgrep_curbuf<CR>', default_opts)
+-- vim.keymap.set('n', '<leader>ss', ':FzfLua live_grep<CR>', default_opts)
+
+-- ====== FzfLua ======
+map('n', '<leader>sf', ':FzfLua files<CR>',      "Search files")
+map('n', '<leader>sg', ':FzfLua live_grep<CR>',  "Search in project")
+map('n', '<leader>sb', ':FzfLua buffers<CR>',    "Search buffers")
+map('n', '<leader>sh', ':FzfLua help_tags<CR>',  "Search help")
+map('n', '<leader>sk', ':FzfLua keymaps<CR>',    "Search hotkeys")
+map('n', '<leader>sr', ':FzfLua resume<CR>',     "Back to last search")
+map('n', '<leader>ss', ':FzfLua blines<CR>',     "Search in file")
 
 -- Buffers
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
-vim.keymap.set('n', '<leader>bx', ':bdelete!<CR>', opts) -- close buffer
-vim.keymap.set('n', '<leader>bn', '<cmd> enew <CR>', opts) -- new buffer
-vim.keymap.set('n', '<leader>bl', '<cmd> ls <CR>', opts) -- new buffer
+map('n', '<Tab>',      ':bnext<CR>',             "Next buffer")
+map('n', '<S-Tab>',    ':bprevous<CR>',          "Previous buffer")
+map('n', '<leader>bx', ':bdelete!<CR>',          "Close buffer")
+map('n', '<leader>bn', '<cmd> enew <CR>',        "New buffer")
+map('n', '<leader>bl', '<cmd> ls <CR>',          "List buffers")
 
 -- Resize with arrows
-vim.keymap.set('n', '<Up>', ':resize -2<CR>', opts)
-vim.keymap.set('n', '<Down>', ':resize +2<CR>', opts)
-vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', opts)
-vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts)
+vim.keymap.set('n', '<Up>', ':resize -2<CR>', default_opts)
+vim.keymap.set('n', '<Down>', ':resize +2<CR>', default_opts)
+vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', default_opts)
+vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', default_opts)
 
 -- Navigate between splits
-vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
-vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
+vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', default_opts)
+vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', default_opts)
+vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', default_opts)
+vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', default_opts)
 
