@@ -18,4 +18,5 @@ vim.o.splitbelow = true -- Force all horizontal splits to go below current windo
 vim.o.splitright = true -- Force all vertical splits to go to the right of current window (default: false)
 vim.o.hlsearch = false -- Set highlight on search (default: true)
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore (default: true)
-
+vim.o.signcolumn = 'yes' -- Always show signcolumn
+vim.o.updatetime = 250
