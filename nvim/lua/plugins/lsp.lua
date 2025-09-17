@@ -9,7 +9,7 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup {
-        ensure_installed = { "pyright", "ruff", "lua_ls", "helm_ls" },
+        ensure_installed = { "pyright", "ruff", "lua_ls", "helm_ls", "bashls" },
         automatic_installation = true,
         automatic_enable = true,
       }
@@ -108,6 +108,14 @@ return {
           [".*/templates/.*%.yml"] = "helm",
         },
       }
+
+      -- Bash LSP
+      vim.lsp.config("bashls", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "sh", "bash", "zsh" },
+        -- cmd = { "bash-language-server", "start" },
+      })
 
     end,
   },
