@@ -6,7 +6,7 @@ filetype off
 set tabstop=2
 set expandtab
 set hlsearch
-set updatetime=100
+set updatetime=250
 set signcolumn=yes
 set clipboard=unnamed
 
@@ -28,12 +28,11 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let g:airline_theme='gruvbox'
