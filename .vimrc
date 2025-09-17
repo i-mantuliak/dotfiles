@@ -41,5 +41,5 @@ set background=dark
 
 " NerdTree
 nnoremap \ :NERDTreeToggle<CR>
-nnoremap <leader>f :BLines<CR>
-nnoremap <leader>s :Files<CR>
+nnoremap <leader>s :BLines<CR>
+nnoremap <leader>f :Files<CR>
