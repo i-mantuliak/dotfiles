@@ -1,7 +1,7 @@
 require 'core.options' -- Load general options
 require 'core.keymaps' -- Load general keymaps
 require 'core.lazy' -- Load Lazy plugin manager
-require 'core.filetypes' -- Define filetypes
+--require 'core.filetypes' -- Define filetypes
 
 -- Install package manager and packages
 require('lazy').setup({
