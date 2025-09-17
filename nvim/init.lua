@@ -1,6 +1,7 @@
 require 'core.options' -- Load general options
 require 'core.keymaps' -- Load general keymaps
 require 'core.lazy' -- Load Lazy plugin manager
+require 'core.filetypes' -- Define filetypes
 
 -- Install package manager and packages
 require('lazy').setup({
@@ -9,7 +10,6 @@ require('lazy').setup({
   require("plugins.fzf"),
   require("plugins.gitsigns"),
   require("plugins.nvim-cmp"),
-  require("plugins.mason"),
   require("plugins.lsp"),
   require("plugins.neoscroll"),
 })

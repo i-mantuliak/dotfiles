@@ -9,13 +9,14 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup {
-        ensure_installed = { "pyright", "ruff", "lua_ls" },
-        -- ensure_installed = { "pylsp", "ruff", "lua_ls" },
+        ensure_installed = { "pyright", "ruff", "lua_ls", "helm_ls" },
         automatic_installation = true,
         automatic_enable = true,
       }
     end,
   },
+  -- helm syntax highlighting
+  { "towolf/vim-helm" },
   {
     "neovim/nvim-lspconfig",
     dependencies = { "hrsh7th/cmp-nvim-lsp" },
@@ -82,6 +83,16 @@ return {
           },
         },
       })
+
+      -- helm_ls
+      vim.lsp.config("helm_ls", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          ["helm-ls"] = { yamlls = { enabled = true } },
+        },
+      })
+
     end,
   },
 }
