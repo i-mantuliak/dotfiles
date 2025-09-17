@@ -12,5 +12,6 @@ require('lazy').setup({
   require("plugins.nvim-cmp"),
   require("plugins.lsp"),
   require("plugins.neoscroll"),
+  require("plugins.lualine"),
 })
 
