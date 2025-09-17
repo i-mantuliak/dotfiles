@@ -17,11 +17,6 @@ end
 -- delete single character without copying into register
 vim.keymap.set('n', 'x', '"_x', default_opts)
 
--- Old Fzf keymaps
--- vim.keymap.set('n', '<leader>sf', ':FzfLua files <CR>', default_opts)
--- vim.keymap.set('n', '<leader>sg', ':FzfLua lgrep_curbuf<CR>', default_opts)
--- vim.keymap.set('n', '<leader>ss', ':FzfLua live_grep<CR>', default_opts)
-
 -- ====== FzfLua ======
 map('n', '<leader>sf', ':FzfLua files<CR>',      "Search files")
 map('n', '<leader>sg', ':FzfLua live_grep<CR>',  "Search in project")
