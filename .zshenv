@@ -6,3 +6,4 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_RUNTIME_DIR="$TMPDIR/runtime-$UID"
 export XDG_STATE_HOME="$HOME/.local/state"
 export PATH="$XDG_BIN_HOME:$PATH"
+mkdir -p $XDG_RUNTIME_DIR
