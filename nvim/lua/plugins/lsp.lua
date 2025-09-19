@@ -9,7 +9,12 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup {
-        ensure_installed = { "pyright", "ruff", "lua_ls", "helm_ls", "bashls" },
+        ensure_installed = {
+          "pyright",
+          "ruff",
+          "lua_ls",
+          "bashls",
+        },
         automatic_installation = true,
         automatic_enable = true,
       }
@@ -17,6 +22,18 @@ return {
   },
   -- helm syntax highlighting
   { "towolf/vim-helm" },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("lsp_signature").setup {
+        bind = true,
+        hint_enable = false,
+        floating_window = true,
+        handler_opts = { border = "rounded" },
+      }
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     dependencies = { "hrsh7th/cmp-nvim-lsp" },
@@ -35,27 +52,36 @@ return {
         bufmap("n", "<leader>rn", vim.lsp.buf.rename)
         bufmap("n", "<leader>ca", vim.lsp.buf.code_action)
         bufmap("n", "<leader>f", function() vim.lsp.buf.format { async = true } end)
+        bufmap("n", "<leader>e", vim.diagnostic.open_float)
+        bufmap("n", "<leader>q", vim.diagnostic.setloclist)
+        bufmap("i", "<C-s>", vim.lsp.buf.signature_help)
+      end
 
-        -- diagnostics popup
-        local function show_diagnostics()
-          local win_id = vim.diagnostic.open_float(nil, { focus = false })
-          vim.api.nvim_create_autocmd({ "CursorMoved", "BufLeave" }, {
-            once = true,
-            buffer = vim.api.nvim_get_current_buf(),
-            callback = function()
-              if vim.api.nvim_win_is_valid(win_id) then
-                vim.api.nvim_win_close(win_id, true)
-              end
-            end,
-          })
+      -- Help to get .venv path
+      local function get_python_path(workspace)
+        if vim.env.VIRTUAL_ENV then
+          return vim.env.VIRTUAL_ENV .. "/bin/python"
         end
-        bufmap("n", "<leader>e", show_diagnostics)
+        for _, venv in ipairs({ ".venv", "venv" }) do
+          local path = workspace .. "/" .. venv .. "/bin/python"
+          if vim.fn.executable(path) == 1 then
+            return path
+          end
+        end
+        return "python3"
       end
 
       -- pyright
       vim.lsp.config("pyright", {
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+          python = {
+            pythonPath = get_python_path(vim.fn.getcwd()),
+            venvPath = ".",
+            venv = ".venv",
+          },
+        },
       })
 
       -- ruff
@@ -103,7 +129,6 @@ return {
           ["values.yml"] = "helm",
         },
         pattern = {
-          -- всё, что в папке templates/ у чарта
           [".*/templates/.*%.yaml"] = "helm",
           [".*/templates/.*%.yml"] = "helm",
         },
@@ -114,7 +139,6 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { "sh", "bash", "zsh" },
-        -- cmd = { "bash-language-server", "start" },
       })
 
     end,

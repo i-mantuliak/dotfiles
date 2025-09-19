@@ -45,9 +45,6 @@ vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', default_opts)
 vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', default_opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', default_opts)
 
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
-
 vim.keymap.set('n', '<C-d>', '<C-d>zz', default_opts)
 vim.keymap.set('n', '<C-b>', '<C-b>zz', default_opts)
 vim.keymap.set('n', '<C-u>', '<C-u>zz', default_opts)
