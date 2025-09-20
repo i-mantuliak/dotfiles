@@ -1,19 +1,19 @@
 return {
   {
-    "mason-org/mason.nvim",
-    build = ":MasonUpdate",
+    'mason-org/mason.nvim',
+    build = ':MasonUpdate',
     config = true,
   },
   {
-    "mason-org/mason-lspconfig.nvim",
-    dependencies = { "mason-org/mason.nvim" },
+    'mason-org/mason-lspconfig.nvim',
+    dependencies = { 'mason-org/mason.nvim' },
     config = function()
-      require("mason-lspconfig").setup {
+      require('mason-lspconfig').setup {
         ensure_installed = {
-          "pyright",
-          "ruff",
-          "lua_ls",
-          "bashls",
+          'pyright',
+          'ruff',
+          'lua_ls',
+          'bashls',
         },
         automatic_installation = true,
         automatic_enable = true,
@@ -21,24 +21,24 @@ return {
     end,
   },
   -- helm syntax highlighting
-  { "towolf/vim-helm" },
+  { 'towolf/vim-helm' },
   {
-    "ray-x/lsp_signature.nvim",
-    event = "InsertEnter",
+    'ray-x/lsp_signature.nvim',
+    event = 'InsertEnter',
     config = function()
-      require("lsp_signature").setup {
+      require('lsp_signature').setup {
         bind = true,
         hint_enable = false,
         floating_window = true,
-        handler_opts = { border = "rounded" },
+        handler_opts = { border = 'rounded' },
       }
     end,
   },
   {
-    "neovim/nvim-lspconfig",
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    'neovim/nvim-lspconfig',
+    dependencies = { 'hrsh7th/cmp-nvim-lsp' },
     config = function()
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       local on_attach = function(client, bufnr)
         local bufmap = function(mode, lhs, rhs)
@@ -46,46 +46,46 @@ return {
         end
 
         -- LSP keymaps
-        bufmap("n", "gd", vim.lsp.buf.definition)
-        bufmap("n", "K", vim.lsp.buf.hover)
-        bufmap("n", "gr", vim.lsp.buf.references)
-        bufmap("n", "<leader>rn", vim.lsp.buf.rename)
-        bufmap("n", "<leader>ca", vim.lsp.buf.code_action)
-        bufmap("n", "<leader>f", function() vim.lsp.buf.format { async = true } end)
-        bufmap("n", "<leader>e", vim.diagnostic.open_float)
-        bufmap("n", "<leader>q", vim.diagnostic.setloclist)
-        bufmap("i", "<C-s>", vim.lsp.buf.signature_help)
+        bufmap('n', 'gd', vim.lsp.buf.definition)
+        bufmap('n', 'K', vim.lsp.buf.hover)
+        bufmap('n', 'gr', vim.lsp.buf.references)
+        bufmap('n', '<leader>rn', vim.lsp.buf.rename)
+        bufmap('n', '<leader>ca', vim.lsp.buf.code_action)
+        bufmap('n', '<leader>f', function() vim.lsp.buf.format { async = true } end)
+        bufmap('n', '<leader>e', vim.diagnostic.open_float)
+        bufmap('n', '<leader>q', vim.diagnostic.setloclist)
+        bufmap('i', '<C-s>', vim.lsp.buf.signature_help)
       end
 
       -- Help to get .venv path
       local function get_python_path(workspace)
         if vim.env.VIRTUAL_ENV then
-          return vim.env.VIRTUAL_ENV .. "/bin/python"
+          return vim.env.VIRTUAL_ENV .. '/bin/python'
         end
-        for _, venv in ipairs({ ".venv", "venv" }) do
-          local path = workspace .. "/" .. venv .. "/bin/python"
+        for _, venv in ipairs({ '.venv', 'venv' }) do
+          local path = workspace .. '/' .. venv .. '/bin/python'
           if vim.fn.executable(path) == 1 then
             return path
           end
         end
-        return "python3"
+        return 'python3'
       end
 
       -- pyright
-      vim.lsp.config("pyright", {
+      vim.lsp.config('pyright', {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
           python = {
             pythonPath = get_python_path(vim.fn.getcwd()),
-            venvPath = ".",
-            venv = ".venv",
+            venvPath = '.',
+            venv = '.venv',
           },
         },
       })
 
       -- ruff
-      vim.lsp.config("ruff", {
+      vim.lsp.config('ruff', {
         on_attach = function(client, bufnr)
           client.server_capabilities.documentFormattingProvider = true
           on_attach(client, bufnr)
@@ -94,15 +94,22 @@ return {
       })
 
       -- lua_ls
-      vim.lsp.config("lua_ls", {
+      vim.lsp.config('lua_ls', {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
           Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim" } },
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = { 'vim' } },
+            format = {
+              enable = true,
+              config = {
+                indent_size = '2',
+                indent_style = 'space',
+              },
+            },
             workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
+              library = vim.api.nvim_get_runtime_file('', true),
               checkThirdParty = false,
             },
             telemetry = { enable = false },
@@ -111,36 +118,35 @@ return {
       })
 
       -- helm_ls
-      vim.lsp.config("helm_ls", {
+      vim.lsp.config('helm_ls', {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
-          ["helm-ls"] = { yamlls = { enabled = true } },
+          ['helm-ls'] = { yamlls = { enabled = true } },
         },
       })
 
       -- Helm filetypes
       vim.filetype.add {
         extension = {
-          tpl = "helm",
+          tpl = 'helm',
         },
         filename = {
-          ["values.yaml"] = "helm",
-          ["values.yml"] = "helm",
+          ['values.yaml'] = 'helm',
+          ['values.yml'] = 'helm',
         },
         pattern = {
-          [".*/templates/.*%.yaml"] = "helm",
-          [".*/templates/.*%.yml"] = "helm",
+          ['.*/templates/.*%.yaml'] = 'helm',
+          ['.*/templates/.*%.yml'] = 'helm',
         },
       }
 
       -- Bash LSP
-      vim.lsp.config("bashls", {
+      vim.lsp.config('bashls', {
         on_attach = on_attach,
         capabilities = capabilities,
-        filetypes = { "sh", "bash", "zsh" },
+        filetypes = { 'sh', 'bash', 'zsh' },
       })
-
     end,
   },
 }

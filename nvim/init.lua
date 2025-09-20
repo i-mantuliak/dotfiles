@@ -1,6 +1,7 @@
 require 'core.options'
 require 'core.keymaps'
 require 'core.lazy'
+require 'core.autocmd'
 
 require('lazy').setup({
   require("plugins.themes.gruvbox-material"),
@@ -11,5 +12,6 @@ require('lazy').setup({
   require("plugins.lsp"),
   require("plugins.neoscroll"),
   require("plugins.lualine"),
+  require("plugins.tree-sitter"),
 })
 
