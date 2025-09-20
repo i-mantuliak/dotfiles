@@ -17,7 +17,7 @@ end
 -- delete single character without copying into register
 vim.keymap.set('n', 'x', '"_x', default_opts)
 
--- ====== FzfLua ======
+-- FzfLua
 map('n', '<leader>sf', ':FzfLua files<CR>',      "Search files")
 map('n', '<leader>sg', ':FzfLua live_grep<CR>',  "Search in project")
 map('n', '<leader>sb', ':FzfLua buffers<CR>',    "Search buffers")
@@ -45,6 +45,7 @@ vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', default_opts)
 vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', default_opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', default_opts)
 
+-- Leave cursor in the middle of the page
 vim.keymap.set('n', '<C-d>', '<C-d>zz', default_opts)
 vim.keymap.set('n', '<C-b>', '<C-b>zz', default_opts)
 vim.keymap.set('n', '<C-u>', '<C-u>zz', default_opts)

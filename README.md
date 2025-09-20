@@ -8,8 +8,9 @@ cp .zshenv ~/
 
 nvim setup:
 ```shell
-brew install neovim ripgrep fzf node@20 bat
-echo 'export PATH="/opt/homebrew/opt/node@20/bin:$PATH"' >> ~/.zshrc
+brew install neovim ripgrep fzf bat
+brew install node@22 # for bash lsp
+echo 'export PATH="/opt/homebrew/opt/node@22/bin:$PATH"' >> ~/.zshrc
 ```
 ghostty setup
 ```shell
