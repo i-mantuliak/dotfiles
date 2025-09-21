@@ -14,6 +14,7 @@ return {
           'ruff',
           'lua_ls',
           'bashls',
+          'helm_ls',
         },
         automatic_installation = true,
         automatic_enable = true,
@@ -114,20 +115,20 @@ return {
         },
       })
 
-      -- Helm filetypes
-      vim.filetype.add {
-        extension = {
-          tpl = 'helm',
-        },
-        filename = {
-          ['values.yaml'] = 'helm',
-          ['values.yml'] = 'helm',
-        },
-        pattern = {
-          ['.*/templates/.*%.yaml'] = 'helm',
-          ['.*/templates/.*%.yml'] = 'helm',
-        },
-      }
+      -- -- Helm filetypes
+      -- vim.filetype.add {
+      --   extension = {
+      --     tpl = 'helm',
+      --   },
+      --   filename = {
+      --     ['values.yaml'] = 'helm',
+      --     ['values.yml'] = 'helm',
+      --   },
+      --   pattern = {
+      --     ['.*/templates/.*%.yaml'] = 'helm',
+      --     ['.*/templates/.*%.yml'] = 'helm',
+      --   },
+      -- }
 
       -- Bash LSP
       vim.lsp.config('bashls', {
