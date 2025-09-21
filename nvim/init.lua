@@ -13,5 +13,6 @@ require('lazy').setup({
   require("plugins.neoscroll"),
   require("plugins.lualine"),
   require("plugins.tree-sitter"),
+  require("plugins.nvim-autopairs"),
 })
 

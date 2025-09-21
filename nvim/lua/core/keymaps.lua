@@ -50,3 +50,8 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', default_opts)
 vim.keymap.set('n', '<C-b>', '<C-b>zz', default_opts)
 vim.keymap.set('n', '<C-u>', '<C-u>zz', default_opts)
 vim.keymap.set('n', '<C-f>', '<C-f>zz', default_opts)
+
+-- New line on Shift+Enter even if not in the end of line
+vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-S-CR>", "<Esc>O", { noremap = true, silent = true })
+
