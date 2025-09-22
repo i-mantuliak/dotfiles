@@ -15,6 +15,7 @@ return {
           'lua_ls',
           'bashls',
           'helm_ls',
+          'kotlin_language_server',
         },
         automatic_installation = true,
         automatic_enable = true,
@@ -56,6 +57,13 @@ return {
         bufmap('n', '<leader>e', vim.diagnostic.open_float)
         bufmap('n', '<leader>q', vim.diagnostic.setloclist)
         bufmap('i', '<C-s>', vim.lsp.buf.signature_help)
+
+        vim.diagnostic.config({
+          virtual_text = true,
+          signs = true,
+          underline = true,
+          update_in_insert = false,
+        })
       end
 
       local get_python_path = require('core.helpers').get_python_path
@@ -90,13 +98,6 @@ return {
           Lua = {
             runtime = { version = 'LuaJIT' },
             diagnostics = { globals = { 'vim' } },
-            format = {
-              enable = true,
-              config = {
-                indent_size = '2',
-                indent_style = 'space',
-              },
-            },
             workspace = {
               library = vim.api.nvim_get_runtime_file('', true),
               checkThirdParty = false,
@@ -114,21 +115,6 @@ return {
           ['helm-ls'] = { yamlls = { enabled = true } },
         },
       })
-
-      -- -- Helm filetypes
-      -- vim.filetype.add {
-      --   extension = {
-      --     tpl = 'helm',
-      --   },
-      --   filename = {
-      --     ['values.yaml'] = 'helm',
-      --     ['values.yml'] = 'helm',
-      --   },
-      --   pattern = {
-      --     ['.*/templates/.*%.yaml'] = 'helm',
-      --     ['.*/templates/.*%.yml'] = 'helm',
-      --   },
-      -- }
 
       -- Bash LSP
       vim.lsp.config('bashls', {
