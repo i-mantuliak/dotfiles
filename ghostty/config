@@ -1,6 +1,5 @@
 theme = GruvboxDark
-font-family = JetBrainsMono Nerd Font
-font-family = Symbols Nerd Font
+font-family = "JetBrainsMono Nerd Font"
 font-synthetic-style = bold
 font-size = 16
 copy-on-select = clipboard
