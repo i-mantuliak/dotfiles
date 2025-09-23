@@ -42,7 +42,7 @@ return {
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      local on_attach = function(client, bufnr)
+      local on_attach = function(_, bufnr)
         local bufmap = function(mode, lhs, rhs)
           vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
         end

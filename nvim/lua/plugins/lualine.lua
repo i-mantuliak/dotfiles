@@ -15,7 +15,7 @@ local function update_venv()
   local python_path = get_python_path(workspace)
 
   if python_path and python_path ~= "python3" then
-    current_venv = "🐍 " .. vim.fn.fnamemodify(vim.fn.fnamemodify(python_path, ":h:h"), ":t")
+    current_venv = "🌍 " .. vim.fn.fnamemodify(vim.fn.fnamemodify(python_path, ":h:h"), ":t")
   else
     current_venv = ""
   end
