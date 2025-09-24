@@ -33,6 +33,7 @@ return {
         hint_enable = false,
         floating_window = true,
         handler_opts = { border = 'rounded' },
+        toggle_key = '<C-s>',
       }
     end,
   },
@@ -56,7 +57,6 @@ return {
         bufmap('n', '<leader>f', function() vim.lsp.buf.format { async = true } end)
         bufmap('n', '<leader>e', vim.diagnostic.open_float)
         bufmap('n', '<leader>q', vim.diagnostic.setloclist)
-        bufmap('i', '<C-s>', vim.lsp.buf.signature_help)
 
         vim.diagnostic.config({
           virtual_text = true,
@@ -121,6 +121,12 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { 'sh', 'bash', 'zsh' },
+      })
+
+      -- Kotlin LSP
+      vim.lsp.config('kotlin_language_server', {
+        on_attach = on_attach,
+        capabilities = capabilities,
       })
     end,
   },
