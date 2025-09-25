@@ -25,24 +25,10 @@ return {
   -- helm syntax highlighting
   { 'towolf/vim-helm' },
   {
-    'ray-x/lsp_signature.nvim',
-    event = 'InsertEnter',
-    config = function()
-      require('lsp_signature').setup {
-        bind = true,
-        hint_enable = false,
-        floating_window = true,
-        handler_opts = { border = 'rounded' },
-        toggle_key = '<C-s>',
-      }
-    end,
-  },
-  {
     'neovim/nvim-lspconfig',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp' },
+    dependencies = { 'saghen/blink.cmp' },
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
       local on_attach = function(_, bufnr)
         local bufmap = function(mode, lhs, rhs)
           vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })

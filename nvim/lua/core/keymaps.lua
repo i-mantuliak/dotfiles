@@ -55,3 +55,5 @@ vim.keymap.set('n', '<C-f>', '<C-f>zz', default_opts)
 vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-S-CR>", "<Esc>O", { noremap = true, silent = true })
 
+-- Clear highlights on search when pressing <Esc> in normal mode
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
