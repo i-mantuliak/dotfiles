@@ -28,7 +28,7 @@ map('n', '<leader>ss', ':FzfLua blines<CR>',     "Search in file")
 
 -- Buffers
 map('n', '<Tab>',      ':bnext<CR>',             "Next buffer")
-map('n', '<S-Tab>',    ':bprevous<CR>',          "Previous buffer")
+map('n', '<S-Tab>',    ':bprevious<CR>',          "Previous buffer")
 map('n', '<leader>bx', ':bdelete!<CR>',          "Close buffer")
 map('n', '<leader>bn', '<cmd> enew <CR>',        "New buffer")
 map('n', '<leader>bl', '<cmd> ls <CR>',          "List buffers")

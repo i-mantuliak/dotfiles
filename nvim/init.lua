@@ -15,5 +15,6 @@ require('lazy').setup({
   require("plugins.tree-sitter"),
   require("plugins.nvim-autopairs"),
   require("plugins.which-key"),
+  require("plugins.bufferline"),
 })
 
