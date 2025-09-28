@@ -2,6 +2,7 @@ require 'core.keymaps'
 require 'core.options'
 require 'core.lazy'
 require 'core.autocmd'
+require 'core.terminal'
 
 require('lazy').setup({
   require("plugins.themes.gruvbox-material"),
@@ -16,5 +17,6 @@ require('lazy').setup({
   require("plugins.nvim-autopairs"),
   require("plugins.which-key"),
   require("plugins.bufferline"),
+  require("plugins.indent-line")
 })
 

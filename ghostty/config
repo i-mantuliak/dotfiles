@@ -14,3 +14,4 @@ window-width = 133
 window-height = 60
 window-save-state = always
 window-show-tab-bar = always
+macos-option-as-alt = true

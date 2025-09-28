@@ -22,4 +22,5 @@ vim.o.signcolumn = 'yes'        -- Always show signcolumn
 vim.o.updatetime = 250          -- Decrease update time
 vim.o.list = true               -- Sets how neovim will display certain whitespace characters in the editor
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.diffopt:append("vertical")
 
