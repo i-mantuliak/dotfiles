@@ -17,6 +17,5 @@ require('lazy').setup({
   require("plugins.nvim-autopairs"),
   require("plugins.which-key"),
   require("plugins.bufferline"),
-  require("plugins.indent-line")
 })
 
