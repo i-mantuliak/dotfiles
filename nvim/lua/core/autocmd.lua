@@ -7,6 +7,25 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.expandtab = true
   end,
 })
+-- format with 2 spaces in sh files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sh",
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.bo.expandtab = true
+  end,
+})
+
+-- format with 2 spaces in helm files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "helm",
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.bo.expandtab = true
+  end,
+})
 
 -- Find helm root directory
 vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
