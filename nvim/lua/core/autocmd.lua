@@ -8,6 +8,28 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Find helm root directory
+vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
+  pattern = {"*.yaml", "*.yml", "*.tpl"},
+  callback = function()
+    local chart_root = vim.fn.findfile("Chart.yaml", ".;")
+    if chart_root ~= "" then
+      vim.bo.filetype = "helm"
+    end
+  end
+})
+
+-- Find helm root directory
+vim.api.nvim_create_autocmd({"BufRead","BufNewFile"}, {
+  pattern = {"*.yaml", "*.yml", "*.tpl"},
+  callback = function()
+    local chart_root = vim.fn.findfile("Chart.yaml", ".;")
+    if chart_root ~= "" then
+      vim.bo.filetype = "helm"
+    end
+  end
+})
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`

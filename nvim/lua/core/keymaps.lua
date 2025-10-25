@@ -14,8 +14,8 @@ local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
--- delete single character without copying into register
-vim.keymap.set('n', 'x', '"_x', default_opts)
+-- Delete single character without copying into register
+map('n', 'x', '"_x', "Delete single character without copying into register")
 
 -- FzfLua
 map('n', '<leader>sf', ':FzfLua files<CR>',      "Search files")
@@ -34,36 +34,36 @@ map('n', '<leader>bn', '<cmd> enew <CR>',        "New buffer")
 map('n', '<leader>bl', '<cmd> ls <CR>',          "List buffers")
 
 -- Resize with arrows
-vim.keymap.set('n', '<Up>', ':resize -2<CR>', default_opts)
-vim.keymap.set('n', '<Down>', ':resize +2<CR>', default_opts)
-vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', default_opts)
-vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', default_opts)
+map('n', '<Up>', ':resize -2<CR>', "Resize with arrows")
+map('n', '<Down>', ':resize +2<CR>', "Resize with arrows")
+map('n', '<Left>', ':vertical resize -2<CR>', "Resize with arrows")
+map('n', '<Right>', ':vertical resize +2<CR>', "Resize with arrows")
 
 -- Navigate between splits
-vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', default_opts)
-vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', default_opts)
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', default_opts)
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', default_opts)
+map('n', '<C-k>', ':wincmd k<CR>', "Move to UP window")
+map('n', '<C-j>', ':wincmd j<CR>', "Move to DOWN window")
+map('n', '<C-h>', ':wincmd h<CR>', "Move to LEFT window")
+map('n', '<C-l>', ':wincmd l<CR>', "Move to RIGHT window")
 
 -- Leave cursor in the middle of the page
-vim.keymap.set('n', '<C-d>', '<C-d>zz', default_opts)
-vim.keymap.set('n', '<C-b>', '<C-b>zz', default_opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', default_opts)
-vim.keymap.set('n', '<C-f>', '<C-f>zz', default_opts)
+map('n', '<C-d>', '<C-d>zz', "Leave cursor in the middle of the page" )
+map('n', '<C-b>', '<C-b>zz', "Leave cursor in the middle of the page" )
+map('n', '<C-u>', '<C-u>zz', "Leave cursor in the middle of the page" )
+map('n', '<C-f>', '<C-f>zz', "Leave cursor in the middle of the page" )
 
 -- New line on Shift+Enter even if not in the end of line
-vim.keymap.set("i", "<S-CR>", "<Esc>o", { noremap = true, silent = true })
-vim.keymap.set("i", "<C-S-CR>", "<Esc>O", { noremap = true, silent = true })
+map("i", "<S-CR>", "<Esc>o", "New line on Shift+Enter even if not in the end of line")
+map("i", "<C-S-CR>", "<Esc>O", "New line on Ctrl+Shift+Enter even if not in the end of line")
 
 -- Clear highlights on search when pressing <Esc> in normal mode
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+map('n', '<Esc>', '<cmd>nohlsearch<CR>', "Clear highlights by pressing ESC in normal mode")
 
 -- Move lines up/down
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+map("n", "<A-j>", ":m .+1<CR>==", "Move line down")
+map("n", "<A-k>", ":m .-2<CR>==", "Move line up")
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", "Move selection down")
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", "Move selection up")
 
 -- Better indenting in visual mode
-vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
-vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+map("v", "<", "<gv", "Indent left and reselect")
+map("v", ">", ">gv", "Indent right and reselect")
