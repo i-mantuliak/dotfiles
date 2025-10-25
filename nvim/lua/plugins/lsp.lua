@@ -11,7 +11,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP keymaps",
   callback = function(args)
     local bufnr = args.buf
-    -- local opts = { buffer = bufnr }
     local bufmap = function(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
     end
@@ -42,11 +41,11 @@ return {
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
       for _, server in ipairs(servers) do
-        require("lspconfig")[server].setup({
+        vim.lsp.config(server, {
           capabilities = require('blink.cmp').get_lsp_capabilities()
         })
+        vim.lsp.enable(server)
       end
     end,
   },
-  -- vim.lsp.enable(servers)
 }
