@@ -23,7 +23,10 @@ map('n', '<leader>sg', ':FzfLua live_grep<CR>',  "Search in project")
 map('n', '<leader>sb', ':FzfLua buffers<CR>',    "Search buffers")
 map('n', '<leader>sh', ':FzfLua help_tags<CR>',  "Search help")
 map('n', '<leader>sk', ':FzfLua keymaps<CR>',    "Search hotkeys")
-map('n', '<leader>sr', ':FzfLua resume<CR>',     "Back to last search")
+-- map('n', '<leader>sr', ':FzfLua resume<CR>',     "Back to last search")
+map('n', '<leader>sr', ':FzfLua lsp_references<CR>',     "Search references")
+map('n', '<leader>sd', ':FzfLua lsp_definitions<CR>',     "Search references")
+map('n', '<leader>sD', ':FzfLua diagnostics_document<CR>',     "Search references")
 map('n', '<leader>ss', ':FzfLua blines<CR>',     "Search in file")
 
 -- Buffers
