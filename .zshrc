@@ -1,0 +1,29 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+export ZSH="$HOME/.oh-my-zsh"
+
+# ZSH_THEME="robbyrussell"
+# ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+COMPLETION_WAITING_DOTS="true"
+plugins=(git docker fzf kubectl helm encode64 brew)
+
+source $ZSH/oh-my-zsh.sh
+fpath+=$HOME/.zsh/pure
+
+alias lg="lazygit"
+alias ls="eza"
+alias ll="ls -lah"
+alias vim="nvim"
+alias v="nvim"
+setopt globdots
+alias pogoda="curl -s 'wttr.in/{Belgrade,St-Petersburg,Hamburg}?format=3'"
+alias k="kubectl"
+source <(kubectl completion zsh)
+export SSH_AUTH_SOCK=/Users/igor/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
+
