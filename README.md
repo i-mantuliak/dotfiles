@@ -26,3 +26,9 @@ ln -s ~/github/dotfiles/tmux/tmux.conf ~/.config/tmux/tmux.conf
 tmux
 ```
 Press `Prefix + I` to install plugins
+
+## aerospace
+Need to disable mission control key bindings in settings (Ctll + -> ...)
+```shell
+ln -s ~/github/dotfiles/aerospace ~/.config/aerospace
+```
