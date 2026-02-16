@@ -89,7 +89,8 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local servers = {
         "pyright",
-        "ruff",
+        -- "ruff",
+        "taplo",
         "lua_ls",
         "bashls",
         "helm_ls",

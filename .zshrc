@@ -21,7 +21,7 @@ setopt globdots
 alias pogoda="curl -s 'wttr.in/{Belgrade,St-Petersburg,Hamburg}?format=3'"
 alias k="kubectl"
 source <(kubectl completion zsh)
-export SSH_AUTH_SOCK=/Users/igor/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
+export SSH_AUTH_SOCK=/Users/${USER}/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
