@@ -27,3 +27,4 @@ require('lazy').setup({
   require("plugins.tree-sitter"),
   require("plugins.which-key"),
 })
+vim.cmd.colorscheme("gruvbox-material")
