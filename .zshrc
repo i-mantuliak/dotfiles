@@ -24,6 +24,7 @@ source <(kubectl completion zsh)
 if [[ $(uname -a | awk '{print $1}') == 'Linux' ]]; then
     export SSH_AUTH_SOCK=${HOME}/.bitwarden-ssh-agent.sock
 elif [[ $(uname -a | awk '{print $1}') == 'Darwin' ]]; then
+    if [ -z $KEEPASS_SSH_AUTH_SOCK ]; then export KEEPASS_SSH_AUTH_SOCK="$SSH_AUTH_SOCK"; fi
     export SSH_AUTH_SOCK=${HOME}/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
 fi
 
