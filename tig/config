@@ -1,0 +1,19 @@
+set show-changes = true
+color cursor black green bold
+color title-focus black blue bold
+color title-blur black blue bold
+
+set commit-order = topo		# Order commits topologically
+set horizontal-scroll = 33%	# Scroll 33% of the view width
+set blame-options = -C -C -C	# Blame lines from other files
+
+# Wrap branch names with () and tags with <>
+set reference-format = (branch) <tag>
+
+# Configure blame view columns using command spanning multiple lines.
+set blame-view = \
+	date:default \
+	author:abbreviated \
+	file-name:auto \
+	id:yes,color \
+	line-number:yes,interval=5 text
