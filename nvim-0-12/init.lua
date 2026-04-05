@@ -32,36 +32,43 @@ vim.o.winborder = "rounded"
 vim.o.termguicolors = true
 
 vim.pack.add({
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", },
 
-    { src = 'https://github.com/neovim/nvim-lspconfig' },
-    { src = 'https://github.com/mason-org/mason-lspconfig.nvim', },
-    { src = 'https://github.com/mason-org/mason.nvim', },
-    { src = 'https://github.com/saghen/blink.cmp',                version = "v1", },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/mason-org/mason-lspconfig.nvim', },
+  { src = 'https://github.com/mason-org/mason.nvim', },
+  { src = 'https://github.com/saghen/blink.cmp',                version = "v1", },
 
-    { src = 'https://github.com/folke/which-key.nvim', },
+  { src = 'https://github.com/folke/which-key.nvim', },
 
-    { src = 'https://github.com/ibhagwan/fzf-lua', },
+  { src = 'https://github.com/ibhagwan/fzf-lua', },
 
-    { src = "https://github.com/sainnhe/gruvbox-material" },
-    { src = 'https://github.com/akinsho/bufferline.nvim', },
-    { src = 'https://github.com/nvim-lualine/lualine.nvim', },
-    { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
+  { src = "https://github.com/sainnhe/gruvbox-material" },
+  { src = 'https://github.com/akinsho/bufferline.nvim', },
+  { src = 'https://github.com/nvim-lualine/lualine.nvim', },
+  { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
+  { src = 'https://github.com/karb94/neoscroll.nvim' },
 
-    { src = 'https://github.com/lewis6991/gitsigns.nvim', },
+  { src = 'https://github.com/lewis6991/gitsigns.nvim', },
 
-    { src = 'https://github.com/nvim-mini/mini.surround', },
-    { src = 'https://github.com/nvim-mini/mini.move', },
-    { src = 'https://github.com/nvim-mini/mini.pairs', },
-    { src = 'https://github.com/nvim-mini/mini.files', },
-    { src = 'https://github.com/nvim-mini/mini.indentscope', },
+  { src = 'https://github.com/nvim-mini/mini.surround', },
+  { src = 'https://github.com/nvim-mini/mini.move', },
+  { src = 'https://github.com/nvim-mini/mini.pairs', },
+  { src = 'https://github.com/nvim-mini/mini.files', },
+  { src = 'https://github.com/nvim-mini/mini.indentscope', },
 })
 
 require('mini.surround').setup()
 require('mini.move').setup()
 require('mini.pairs').setup()
-require('mini.files').setup()
 require('mini.indentscope').setup()
+require('mini.files').setup({
+  mappings = {
+    close      = '<ESC>',
+    go_in_plus = '<CR>',
+  },
+})
+require("neoscroll").setup({ duration_multiplier = 0.4 })
 
 ---------------------------------------
 ----------- gruvbox-material ----------
@@ -87,36 +94,36 @@ require('lualine').setup()
 ------------ fuzzy finder -------------
 ---------------------------------------
 require('fzf-lua').setup {
-    keymap = {
-        -- fzf = {
-        --     ["ctrl-u"] = "preview-page-up",
-        --     ["ctrl-d"] = "preview-page-down",
-        -- },
-        builtin = {
-            ["<C-d>"] = "preview-page-down",
-            ["<C-u>"] = "preview-page-up",
-        }
+  keymap = {
+    -- fzf = {
+    --     ["ctrl-u"] = "preview-page-up",
+    --     ["ctrl-d"] = "preview-page-down",
+    -- },
+    builtin = {
+      ["<C-d>"] = "preview-page-down",
+      ["<C-u>"] = "preview-page-up",
     }
+  }
 }
 
 ---------------------------------------
 ----------- nvim-treesitter -----------
 ---------------------------------------
 local parsers = {
-    "lua", "vim", "vimdoc", "query", "dockerfile", "zsh", "nginx",
-    "python", "html", "xml", "java", "helm", "jinja", "toml",
-    "json", "yaml", "markdown", "bash", "go", "kotlin",
+  "lua", "vim", "vimdoc", "query", "dockerfile", "zsh", "nginx",
+  "python", "html", "xml", "java", "helm", "jinja", "toml",
+  "json", "yaml", "markdown", "bash", "go", "kotlin",
 }
 require('nvim-treesitter').setup {
-    install_dir = vim.fn.stdpath('data') .. '/site',
+  install_dir = vim.fn.stdpath('data') .. '/site',
 }
 require('nvim-treesitter').install(parsers)
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = parsers,
-    callback = function()
-        vim.treesitter.start()
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end,
+  pattern = parsers,
+  callback = function()
+    vim.treesitter.start()
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
 
 ---------------------------------------
@@ -124,158 +131,164 @@ vim.api.nvim_create_autocmd('FileType', {
 ---------------------------------------
 vim.lsp.on_type_formatting.enable()
 local servers = {
-    "pyright",
-    "ruff",
-    "taplo",
-    "lua_ls",
-    "bashls",
-    "helm_ls",
-    "kotlin_language_server",
+  "pyright",
+  "ruff",
+  "taplo",
+  "lua_ls",
+  "bashls",
+  "helm_ls",
+  "kotlin_language_server",
 }
 require("mason").setup()
 require('mason-lspconfig').setup {
-    ensure_installed = servers,
-    automatic_installation = true,
-    automatic_enable = true,
+  ensure_installed = servers,
+  automatic_installation = true,
+  automatic_enable = true,
 }
 require('blink.cmp').setup({
-    signature = { enabled = true },
-    keymap = { preset = 'default' },
-    appearance = { nerd_font_variant = 'mono' },
-    completion = {
-        documentation = { auto_show = true },
-        accept = { auto_brackets = { enabled = false }, },
-    },
-    sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
-    fuzzy = { implementation = "lua" }
+  signature = { enabled = true },
+  keymap = { preset = 'default' },
+  appearance = { nerd_font_variant = 'mono' },
+  completion = {
+    documentation = { auto_show = true },
+    accept = { auto_brackets = { enabled = false }, },
+  },
+  sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
+  fuzzy = { implementation = "lua" }
 })
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 local on_attach_lsp = function(client, bufnr)
-    local map = function(mode, keys, func, desc)
-        vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
-    end
-    map('n', 'grn', vim.lsp.buf.rename, '[R]e[n]ame')
-    map({ 'n', 'x' }, 'gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction')
-    map('n', 'grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-    map('n', 'grd', vim.lsp.buf.definition, '[G]oto [D]definition')
-    map('n', 'gd', vim.lsp.buf.definition, '[G]oto [D]definition')
-    map('n', '<leader>df', vim.diagnostic.open_float, 'Show [d]iagnostics [f]loat')
-    map('n', '<leader>dl', vim.diagnostic.setloclist, 'Show [d]iagnostics [l]ist')
-    map('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end, "Format buffer")
-    map('n', 'K', vim.lsp.buf.hover, "Show documentation for what is under cursor")
+  local map = function(mode, keys, func, desc)
+    vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+  end
+  map('n', 'grn', vim.lsp.buf.rename, '[R]e[n]ame')
+  map({ 'n', 'x' }, 'gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction')
+  map('n', 'grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  map('n', 'grd', vim.lsp.buf.definition, '[G]oto [D]definition')
+  map('n', 'gd', vim.lsp.buf.definition, '[G]oto [D]definition')
+  map('n', '<leader>df', vim.diagnostic.open_float, 'Show [d]iagnostics [f]loat')
+  map('n', '<leader>dl', vim.diagnostic.setloclist, 'Show [d]iagnostics [l]ist')
+  map('n', '<leader>f', function() vim.lsp.buf.format({ async = true }) end, "Format buffer")
+  map('n', 'K', vim.lsp.buf.hover, "Show documentation for what is under cursor")
 end
-
 for _, server in ipairs(servers) do
-    vim.lsp.config(server, {
-        capabilities = capabilities,
-        on_attach = on_attach_lsp,
-    })
-    vim.lsp.enable(server)
+  vim.lsp.config(server, {
+    capabilities = capabilities,
+    on_attach = on_attach_lsp,
+  })
+  vim.lsp.enable(server)
 end
-
+-- Set indentation to 2 spaces
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = { 'css', 'html', 'javascript',
+    'lua', 'markdown', 'md', 'typescript',
+    'scss', 'xml', 'xhtml', 'yaml', 'sh', 'bash',
+  },
+  command = 'setlocal shiftwidth=2 tabstop=2'
+})
 
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.hl.on_yank()
-    end,
+  callback = function()
+    vim.hl.on_yank()
+  end,
 })
 
 -- Return cursor to last known position
 vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
-    desc = 'return cursor to where it was last time closing the file',
-    pattern = '*',
-    command = 'silent! normal! g`"zv',
+  desc = 'return cursor to where it was last time closing the file',
+  pattern = '*',
+  command = 'silent! normal! g`"zv',
 })
 
 ---------------------------------------
 -------------- gitsigns ---------------
 ---------------------------------------
 require('gitsigns').setup {
-    signs      = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-    },
-    signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
-    numhl      = true,  -- Toggle with `:Gitsigns toggle_numhl`
-    on_attach  = function(bufnr)
-        local gitsigns = require('gitsigns')
+  signs      = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+  signcolumn = false,   -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = true,    -- Toggle with `:Gitsigns toggle_numhl`
+  on_attach  = function(bufnr)
+    local gitsigns = require('gitsigns')
 
-        local function map(mode, l, r, desc, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            opts.desc = desc
-            vim.keymap.set(mode, l, r, opts)
-        end
-
-        -- Navigation
-        map('n', ']c', function()
-            if vim.wo.diff then
-                vim.cmd.normal({ ']c', bang = true })
-            else
-                gitsigns.nav_hunk('next')
-            end
-        end, 'Next hunk')
-
-        map('n', '[c', function()
-            if vim.wo.diff then
-                vim.cmd.normal({ '[c', bang = true })
-            else
-                gitsigns.nav_hunk('prev')
-            end
-        end, 'Prev hunk')
-
-        -- Actions
-        map('n', '<leader>hs', gitsigns.stage_hunk, 'Stage hunk')
-        map('n', '<leader>hr', gitsigns.reset_hunk, 'Reset hunk')
-
-        map('v', '<leader>hs', function()
-            gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-        end, 'Stage selected hunk')
-
-        map('v', '<leader>hr', function()
-            gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-        end, 'Reset selected hunk')
-
-        map('n', '<leader>hS', gitsigns.stage_buffer, 'Stage buffer')
-        map('n', '<leader>hR', gitsigns.reset_buffer, 'Reset buffer')
-        map('n', '<leader>hp', gitsigns.preview_hunk, 'Preview hunk')
-        map('n', '<leader>hi', gitsigns.preview_hunk_inline, 'Preview hunk inline')
-
-        map('n', '<leader>hb', function()
-            gitsigns.blame_line({ full = true })
-        end, 'Blame line')
-
-        map('n', '<leader>hd', gitsigns.diffthis, 'Diff against index')
-
-        map('n', '<leader>hD', function()
-            gitsigns.diffthis('~')
-        end, 'Diff against last commit')
-
-        map('n', '<leader>hQ', function()
-            gitsigns.setqflist('all')
-        end, 'Send all hunks to quickfix')
-
-        map('n', '<leader>hq', gitsigns.setqflist, 'Send hunks to quickfix')
-
-        -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, 'Toggle line blame')
-        map('n', '<leader>tw', gitsigns.toggle_word_diff, 'Toggle word diff')
-
-        -- Text object
-        map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, 'Select hunk')
+    local function map(mode, l, r, desc, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      opts.desc = desc
+      vim.keymap.set(mode, l, r, opts)
     end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({ ']c', bang = true })
+      else
+        gitsigns.nav_hunk('next')
+      end
+    end, 'Next hunk')
+
+    map('n', '[c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({ '[c', bang = true })
+      else
+        gitsigns.nav_hunk('prev')
+      end
+    end, 'Prev hunk')
+
+    -- Actions
+    map('n', '<leader>hs', gitsigns.stage_hunk, 'Stage hunk')
+    map('n', '<leader>hr', gitsigns.reset_hunk, 'Reset hunk')
+
+    map('v', '<leader>hs', function()
+      gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+    end, 'Stage selected hunk')
+
+    map('v', '<leader>hr', function()
+      gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+    end, 'Reset selected hunk')
+
+    map('n', '<leader>hS', gitsigns.stage_buffer, 'Stage buffer')
+    map('n', '<leader>hR', gitsigns.reset_buffer, 'Reset buffer')
+    map('n', '<leader>hp', gitsigns.preview_hunk, 'Preview hunk')
+    map('n', '<leader>hi', gitsigns.preview_hunk_inline, 'Preview hunk inline')
+
+    map('n', '<leader>hb', function()
+      gitsigns.blame_line({ full = true })
+    end, 'Blame line')
+
+    map('n', '<leader>hd', gitsigns.diffthis, 'Diff against index')
+
+    map('n', '<leader>hD', function()
+      gitsigns.diffthis('~')
+    end, 'Diff against last commit')
+
+    map('n', '<leader>hQ', function()
+      gitsigns.setqflist('all')
+    end, 'Send all hunks to quickfix')
+
+    map('n', '<leader>hq', gitsigns.setqflist, 'Send hunks to quickfix')
+
+    -- Toggles
+    map('n', '<leader>tb', gitsigns.toggle_current_line_blame, 'Toggle line blame')
+    map('n', '<leader>tw', gitsigns.toggle_word_diff, 'Toggle word diff')
+
+    -- Text object
+    map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, 'Select hunk')
+  end
 }
 
 -- Map opts arguments
 local default_opts = { noremap = true, silent = true }
 local function map(mode, lhs, rhs, desc)
-    local opts = vim.tbl_extend("force", default_opts, { desc = desc })
-    vim.keymap.set(mode, lhs, rhs, opts)
+  local opts = vim.tbl_extend("force", default_opts, { desc = desc })
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 -- Delete single character without copying into register
