@@ -17,7 +17,7 @@ vim.o.shiftwidth = 4            -- The number of spaces inserted for each indent
 vim.o.tabstop = 4               -- Insert n spaces for a tab (default: 8)
 vim.o.softtabstop = 4           -- Number of spaces that a tab counts for while performing editing operations (default: 0)
 vim.o.expandtab = true          -- Convert tabs to spaces (default: false)
-vim.o.scrolloff = 8             -- Minimal number of screen lines to keep above and below the cursor (default: 0)
+vim.o.scrolloff = 10            -- Minimal number of screen lines to keep above and below the cursor (default: 0)
 vim.o.sidescrolloff = 8         -- Minimal number of screen columns either side of cursor if wrap is `false` (default: 0)
 vim.o.cursorline = true         -- Highlight the current line (default: false)
 vim.o.splitbelow = true         -- Force all horizontal splits to go below current window (default: false)
@@ -62,13 +62,46 @@ require('mini.surround').setup()
 require('mini.move').setup()
 require('mini.pairs').setup()
 require('mini.indentscope').setup()
+
+require("neoscroll").setup({ duration_multiplier = 0.6, })
+require('bufferline').setup()
+require('lualine').setup()
+
+---------------------------------------
+-------------- mini.files -------------
+---------------------------------------
 require('mini.files').setup({
-  mappings = {
-    close      = '<ESC>',
-    go_in_plus = '<CR>',
-  },
+--   mappings = {
+--     close      = '<ESC>',
+--     go_in_plus = '<CR>',
+--   },
 })
-require("neoscroll").setup({ duration_multiplier = 0.4 })
+local map_split = function(buf_id, lhs, direction)
+  local rhs = function()
+    local cur_target = MiniFiles.get_explorer_state().target_window
+    local new_target = vim.api.nvim_win_call(cur_target, function()
+      vim.cmd(direction .. ' split')
+      return vim.api.nvim_get_current_win()
+    end)
+    MiniFiles.set_target_window(new_target)
+    MiniFiles.go_in()
+  end
+
+  -- Adding `desc` will result into `show_help` entries
+  local desc = 'Split ' .. direction
+  vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
+end
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesBufferCreate',
+  callback = function(args)
+    local buf_id = args.data.buf_id
+    -- Tweak keys to your liking
+    map_split(buf_id, '<C-s>', 'belowright horizontal')
+    map_split(buf_id, '<C-v>', 'belowright vertical')
+    map_split(buf_id, '<C-t>', 'tab')
+  end,
+})
 
 ---------------------------------------
 ----------- gruvbox-material ----------
@@ -83,22 +116,11 @@ vim.cmd.colorscheme("gruvbox-material")
 -- vim.cmd.colorscheme("slate")
 
 
-
----------------------------------------
--------------- styling ----------------
----------------------------------------
-require('bufferline').setup()
-require('lualine').setup()
-
 ---------------------------------------
 ------------ fuzzy finder -------------
 ---------------------------------------
 require('fzf-lua').setup {
   keymap = {
-    -- fzf = {
-    --     ["ctrl-u"] = "preview-page-up",
-    --     ["ctrl-d"] = "preview-page-down",
-    -- },
     builtin = {
       ["<C-d>"] = "preview-page-down",
       ["<C-u>"] = "preview-page-up",
@@ -117,12 +139,14 @@ local parsers = {
 require('nvim-treesitter').setup {
   install_dir = vim.fn.stdpath('data') .. '/site',
 }
-require('nvim-treesitter').install(parsers)
+for _, parser in ipairs(parsers) do
+  require('nvim-treesitter').install(parser):wait()
+end
+-- require('nvim-treesitter').install(parsers)
 vim.api.nvim_create_autocmd('FileType', {
   pattern = parsers,
   callback = function()
     vim.treesitter.start()
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
 
@@ -318,11 +342,6 @@ map('n', '<C-k>', ':wincmd k<CR>', "Move to UP window")
 map('n', '<C-j>', ':wincmd j<CR>', "Move to DOWN window")
 map('n', '<C-h>', ':wincmd h<CR>', "Move to LEFT window")
 map('n', '<C-l>', ':wincmd l<CR>', "Move to RIGHT window")
--- Leave cursor in the middle of the page
-map('n', '<C-d>', '<C-d>zz', "Leave cursor in the middle of the page")
-map('n', '<C-b>', '<C-b>zz', "Leave cursor in the middle of the page")
-map('n', '<C-u>', '<C-u>zz', "Leave cursor in the middle of the page")
-map('n', '<C-f>', '<C-f>zz', "Leave cursor in the middle of the page")
 -- Clear highlights on search when pressing <Esc> in normal mode
 map('n', '<Esc>', '<cmd>nohlsearch<CR>', "Clear highlights by pressing ESC in normal mode")
 -- Incremental Selection
