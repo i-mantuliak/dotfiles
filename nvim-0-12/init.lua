@@ -325,3 +325,7 @@ map('n', '<C-u>', '<C-u>zz', "Leave cursor in the middle of the page")
 map('n', '<C-f>', '<C-f>zz', "Leave cursor in the middle of the page")
 -- Clear highlights on search when pressing <Esc> in normal mode
 map('n', '<Esc>', '<cmd>nohlsearch<CR>', "Clear highlights by pressing ESC in normal mode")
+-- Incremental Selection
+vim.keymap.set('n', '<CR>', 'v_an', { remap = true, desc = 'Start incremental selection' })
+vim.keymap.set('v', '<CR>', 'an', { remap = true, desc = 'Increment selection' })
+vim.keymap.set('v', '<BS>', 'in', { remap = true, desc = 'Decrement selection' })
