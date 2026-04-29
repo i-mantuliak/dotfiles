@@ -56,6 +56,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-mini/mini.pairs', },
   { src = 'https://github.com/nvim-mini/mini.files', },
   { src = 'https://github.com/nvim-mini/mini.indentscope', },
+  { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim', },
 })
 
 require('mini.surround').setup()
@@ -155,6 +156,7 @@ vim.api.nvim_create_autocmd('FileType', {
 ---------------------------------------
 vim.lsp.on_type_formatting.enable()
 local servers = {
+  "ansiblels",
   "pyright",
   "ruff",
   "taplo",
@@ -180,6 +182,18 @@ require('blink.cmp').setup({
   sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
   fuzzy = { implementation = "lua" }
 })
+
+vim.filetype.add({
+  pattern = {
+    [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
+    [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
+    [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
+    [".*/roles/.*/handlers/.*%.ya?ml"] = "yaml.ansible",
+    [".*/inventory/.*%.ya?ml"] = "yaml.ansible",
+  },
+})
+
+
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 local on_attach_lsp = function(client, bufnr)
   local map = function(mode, keys, func, desc)

@@ -6,6 +6,7 @@ color title-blur black blue bold
 set commit-order = topo		# Order commits topologically
 set horizontal-scroll = 33%	# Scroll 33% of the view width
 set blame-options = -C -C -C	# Blame lines from other files
+set wrap-lines = true
 
 # Wrap branch names with () and tags with <>
 set reference-format = (branch) <tag>
