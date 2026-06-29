@@ -32,3 +32,14 @@ Need to disable mission control key bindings in settings (Ctll + -> ...)
 ```shell
 ln -s ~/github/dotfiles/aerospace ~/.config/aerospace
 ```
+
+## arch
+```shell
+pacman -S npm fzf tree-sitter-cli ttf-jetbrains-mono-nerd zip unzip tig ripgrep htop neovim eza jq yq tmux alacritty iwd less amd-ucode wireplumber openssh qt6-wayland qt5-wayland hyprpolkitagent impala bluetui wiremix
+```
+
+yay
+```
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+yay -S brave-bin
+```

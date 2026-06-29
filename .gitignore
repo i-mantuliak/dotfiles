@@ -1,3 +1,4 @@
 lazy-lock.json
 tmux/plugins
 .DS_Store
+nvim-pack-lock.json
