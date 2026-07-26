@@ -1,0 +1,50 @@
+[options]
+focus_follows_mouse = false
+mouse_follows_focus = false
+preset_column_widths = [0.33, 0.5, 0.66, 1]
+animation_speed = 20
+auto_center = false
+
+# [padding]
+# top = 10
+# bottom = 10
+# left = 10
+# right = 10
+
+[bindings]
+window_resize = "alt - r"
+window_center = "alt - c"
+quit = "ctrl + alt - q"
+window_focus_west = "cmd + shift - leftarrow"
+window_focus_east = "cmd + shift - rightarrow"
+window_swap_west = "cmd + ctrl - leftarrow"
+window_swap_east = "cmd + ctrl - rightarrow"
+window_virtual_north = "cmd + shift - k"
+window_virtual_south = "cmd + shift - j"
+window_virtualmove_north = "cmd + alt - k"
+window_virtualmove_south = "cmd + alt - j"
+window_virtualnum_1 = "cmd - 1"
+window_virtualnum_2 = "cmd - 2"
+window_virtualnum_3 = "cmd - 3"
+window_virtualnum_4 = "cmd - 4"
+window_virtualnum_5 = "cmd - 5"
+window_virtualmovenum_1 = "cmd + ctrl - 1"
+window_virtualmovenum_2 = "cmd + ctrl - 2"
+window_virtualmovenum_3 = "cmd + ctrl - 3"
+window_virtualmovenum_4 = "cmd + ctrl - 4"
+window_virtualmovenum_5 = "cmd + ctrl - 5"
+window_manage = "cmd - m"
+
+[swipe.scroll]
+vertical_modifier = "cmd"
+
+[swipe.gesture]
+# direction = "Reversed"
+
+[decorations.inactive.dim]
+opacity = -0.1
+opacity_night = -0.05
+
+[workspaces]
+names = ["code", "comms", "browse", "docs", "misc"]
+
