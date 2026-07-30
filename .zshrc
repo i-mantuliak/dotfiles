@@ -2,6 +2,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 export ZSH="$HOME/.oh-my-zsh"
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="agnoster"

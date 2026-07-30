@@ -5,10 +5,13 @@ TERM = "xterm-256color"
 [window]
 padding.x = 5
 padding.y = 5
-opacity = 0.9
+opacity = 1
 blur = true
 dimensions = { columns = 150, lines = 53 }
-decorations = "Buttonless"
+#decorations = "Buttonless"
+decorations = "full"
+dynamic_title = true
+
 option_as_alt = "Both"
 
 [font]

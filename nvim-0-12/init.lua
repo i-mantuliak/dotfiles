@@ -54,9 +54,11 @@ vim.pack.add({
   { src = 'https://github.com/nvim-mini/mini.surround', },
   { src = 'https://github.com/nvim-mini/mini.move', },
   { src = 'https://github.com/nvim-mini/mini.pairs', },
-  { src = 'https://github.com/nvim-mini/mini.files', },
+  -- { src = 'https://github.com/nvim-mini/mini.files', },
   { src = 'https://github.com/nvim-mini/mini.indentscope', },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim', },
+
+  { src = 'https://github.com/nvim-tree/nvim-tree.lua' },
 })
 
 require('mini.surround').setup()
@@ -68,41 +70,44 @@ require("neoscroll").setup({ duration_multiplier = 0.6, })
 require('bufferline').setup()
 require('lualine').setup()
 
+
+require("nvim-tree").setup()
+
 ---------------------------------------
 -------------- mini.files -------------
 ---------------------------------------
-require('mini.files').setup({
---   mappings = {
---     close      = '<ESC>',
---     go_in_plus = '<CR>',
---   },
-})
-local map_split = function(buf_id, lhs, direction)
-  local rhs = function()
-    local cur_target = MiniFiles.get_explorer_state().target_window
-    local new_target = vim.api.nvim_win_call(cur_target, function()
-      vim.cmd(direction .. ' split')
-      return vim.api.nvim_get_current_win()
-    end)
-    MiniFiles.set_target_window(new_target)
-    MiniFiles.go_in()
-  end
-
-  -- Adding `desc` will result into `show_help` entries
-  local desc = 'Split ' .. direction
-  vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
-end
-
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniFilesBufferCreate',
-  callback = function(args)
-    local buf_id = args.data.buf_id
-    -- Tweak keys to your liking
-    map_split(buf_id, '<C-s>', 'belowright horizontal')
-    map_split(buf_id, '<C-v>', 'belowright vertical')
-    map_split(buf_id, '<C-t>', 'tab')
-  end,
-})
+-- require('mini.files').setup({
+-- --   mappings = {
+-- --     close      = '<ESC>',
+-- --     go_in_plus = '<CR>',
+-- --   },
+-- })
+-- local map_split = function(buf_id, lhs, direction)
+--   local rhs = function()
+--     local cur_target = MiniFiles.get_explorer_state().target_window
+--     local new_target = vim.api.nvim_win_call(cur_target, function()
+--       vim.cmd(direction .. ' split')
+--       return vim.api.nvim_get_current_win()
+--     end)
+--     MiniFiles.set_target_window(new_target)
+--     MiniFiles.go_in()
+--   end
+--
+--   -- Adding `desc` will result into `show_help` entries
+--   local desc = 'Split ' .. direction
+--   vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
+-- end
+--
+-- vim.api.nvim_create_autocmd('User', {
+--   pattern = 'MiniFilesBufferCreate',
+--   callback = function(args)
+--     local buf_id = args.data.buf_id
+--     -- Tweak keys to your liking
+--     map_split(buf_id, '<C-s>', 'belowright horizontal')
+--     map_split(buf_id, '<C-v>', 'belowright vertical')
+--     map_split(buf_id, '<C-t>', 'tab')
+--   end,
+-- })
 
 ---------------------------------------
 ----------- gruvbox-material ----------
@@ -332,7 +337,8 @@ end
 -- Delete single character without copying into register
 map('n', 'x', '"_x', "Delete single character without copying into register")
 -- Open MiniFiles
-map({ 'n', 'v' }, '\\', function() MiniFiles.open() end, "Open MiniFiles")
+-- map({ 'n', 'v' }, '\\', function() MiniFiles.open() end, "Open MiniFiles")
+map({ 'n', 'v' }, '\\', ':NvimTreeToggle<CR>', "Open MiniFiles")
 -- FzfLua
 map('n', '<leader>sf', ':FzfLua files<CR>', "Search files")
 map('n', '<leader>sg', ':FzfLua live_grep<CR>', "Search in project")
