@@ -9,7 +9,7 @@
         "orientation": "horizontal",
         "modules" : [
             "hyprland/workspaces",
-//            "niri/workspaces",
+           // "niri/workspaces",
             "mpris"
         ]
     },

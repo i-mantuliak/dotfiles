@@ -146,7 +146,7 @@ require('nvim-treesitter').setup {
   install_dir = vim.fn.stdpath('data') .. '/site',
 }
 for _, parser in ipairs(parsers) do
-  require('nvim-treesitter').install(parser):wait()
+  require('nvim-treesitter').install(parser)
 end
 -- require('nvim-treesitter').install(parsers)
 vim.api.nvim_create_autocmd('FileType', {
@@ -168,7 +168,8 @@ local servers = {
   "lua_ls",
   "bashls",
   "helm_ls",
-  "kotlin_language_server",
+  -- "kotlin_language_server",
+  "jsonls",
 }
 require("mason").setup()
 require('mason-lspconfig').setup {

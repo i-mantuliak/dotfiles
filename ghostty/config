@@ -1,22 +1,23 @@
-theme = Gruvbox Dark Hard
+theme = Gruvbox Material Dark
+background = 1d2021
 font-family = "JetBrainsMono Nerd Font"
 font-synthetic-style = bold
-font-size = 16
+font-size = 13
 copy-on-select = clipboard
 confirm-close-surface = false
 quit-after-last-window-closed = true
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = hidden
+gtk-titlebar = false
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor,ssh-env
 window-width = 133
 window-height = 60
 window-save-state = always
-window-show-tab-bar = auto
 window-padding-x = 15
 window-padding-y = 15
 macos-option-as-alt = true
-
-keybind = global:cmd+backquote=toggle_quick_terminal
+window-show-tab-bar = never
+keybind = ctrl+v=paste_from_clipboard
 

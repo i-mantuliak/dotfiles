@@ -106,7 +106,8 @@
             "default": [" :", " :", " :"]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "hyprctl dispatch exec '[float] $TERMINAL -e wiremix -v output'"
+        // "on-click-right": "hyprctl dispatch exec '[float] $TERMINAL -e wiremix -v output'"
+        "on-click-right": "hyprctl eval \"hl.exec_cmd('alacritty -e wiremix -v output', { float = true })\""
     },
     "backlight/slider": {
         "min": 5,
@@ -121,13 +122,13 @@
         "format-wifi": " ",
         "format-ethernet": " ",
         "tooltip-format": "{essid}\n\nFrequency: {frequency}GHz\nStrength: {signalStrength}%\n\n{bandwidthUpBytes}   {bandwidthDownBytes}",
-        "on-click-right": "hyprctl dispatch exec '[float] $TERMINAL -e impala'",
+        "on-click-right": "hyprctl eval \"hl.exec_cmd('alacritty -e impala', { float = true })\"",
         "menu": "on-click",
         "menu-file": "~/.config/waybar/context/network.xml",
         "menu-actions": {
   			"action-1": "nmcli radio wifi off",
   			"action-2": "nmcli radio wifi on",
-            "action-3": "hyprctl dispatch exec '[float] $TERMINAL -e impala'",
+            "action-3": "hyprctl eval \"hl.exec_cmd('alacritty -e impala', { float = true })\"",
             "action-4": "hyprctl dispatch exec nm-connection-editor"
   		}
     },
@@ -143,7 +144,7 @@
         "tooltip-format-enumerate-connected": "{device_alias}",
         "tooltip-format-enumerate-connected-battery": "{device_alias}   {device_battery_percentage}%",
         // "on-click": "~/.local/bin/toggle_bluetooth &",
-        "on-click-right": "hyprctl dispatch exec '[float] $TERMINAL -e bluetui'"
+        "on-click-right": "hyprctl eval \"hl.exec_cmd('alacritty -e bluetui', { float = true,  })\""
     },
 
     "battery": {
@@ -162,7 +163,7 @@
     },
 
     "clock": {
-        "timezone": "America/Argentina/Buenos_Aires",
+        "timezone": "Europe/Belgrade",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%H:%M %d %B %Y}",
         "on-click-right": "hyprctl dispatch exec 'alacritty --class=peaclock -e peaclock'",
