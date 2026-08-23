@@ -347,8 +347,8 @@ map('n', '<leader>sh', ':FzfLua help_tags<CR>', "Search help")
 map('n', '<leader>sk', ':FzfLua keymaps<CR>', "Search hotkeys")
 map('n', '<leader>sr', ':FzfLua resume<CR>', "Back to last search")
 map('n', '<leader>lr', ':FzfLua lsp_references<CR>', "Search references")
-map('n', '<leader>ld', ':FzfLua lsp_definitions<CR>', "Search references")
-map('n', '<leader>lD', ':FzfLua diagnostics_document<CR>', "Search references")
+map('n', '<leader>ld', ':FzfLua lsp_definitions<CR>', "Search definitions")
+map('n', '<leader>lD', ':FzfLua diagnostics_document<CR>', "Search diagnostics")
 map('n', '<leader>ss', ':FzfLua blines<CR>', "Search in file")
 
 -- Buffers
