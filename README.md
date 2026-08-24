@@ -3,7 +3,11 @@ My Dotfiles
 
 ## settings for XDG envs:
 ```shell
-cp .zshenv ~/
+sudo tee -a /etc/zshenv > /dev/null <<'EOF'
+export ZDOTDIR=$HOME/.config/zsh
+export XDG_CONFIG_HOME=$HOME/.config
+EOF
+ln -s ~/github/dotfiles/zsh ~/.config/zsh
 ```
 
 ## nvim setup:

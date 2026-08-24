@@ -1,18 +1,3 @@
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-# export ZSH="$HOME/.oh-my-zsh"
-#
-# # ZSH_THEME="robbyrussell"
-# # ZSH_THEME="agnoster"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-# COMPLETION_WAITING_DOTS="true"
-# plugins=(git docker fzf kubectl helm encode64 brew)
-#
-# # source $ZSH/oh-my-zsh.sh
-# fpath+=$HOME/.zsh/pure
-
-
 # =========================================================
 # History
 # =========================================================
@@ -55,16 +40,23 @@ if command -v eza > /dev/null 2>&1; then
     alias ls="eza --icons"
     alias ll="eza -lah --icons --git"
     alias tree="eza --tree --icons"
+else
+    alias ll='ls -lah'
 fi
 if command -v bat > /dev/null 2>&1; then
     alias cat='bat'
 fi
 
-alias vim="nvim"
-alias v="nvim"
+if command -v nvim > /dev/null 2>&1; then
+    alias vim="nvim"
+    alias v="nvim"
+else
+    alias v="vim"
+fi
+
 alias pogoda="curl -s 'wttr.in/{Belgrade,St-Petersburg,Hamburg}?format=3'"
 alias k="kubectl"
-# source <(kubectl completion zsh)
+
 if [[ $(uname -a | awk '{print $1}') == 'Linux' ]]; then
     export SSH_AUTH_SOCK=${HOME}/.bitwarden-ssh-agent.sock
 elif [[ $(uname -a | awk '{print $1}') == 'Darwin' ]]; then
@@ -73,15 +65,19 @@ elif [[ $(uname -a | awk '{print $1}') == 'Darwin' ]]; then
 fi
 
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
-# export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 
-# bindkey '^[[H' beginning-of-line
-# bindkey '^[[F' end-of-line
-# bindkey '^[[1~' beginning-of-line
-# bindkey '^[[4~' end-of-line
-bindkey -v
-bindkey '^[[B' history-search-forward
-bindkey '^[[A' history-search-backward
+
+bindkey -e
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 eval "$(starship init zsh)"
