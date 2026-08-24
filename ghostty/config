@@ -2,7 +2,7 @@ theme = Gruvbox Material Dark
 background = 1d2021
 font-family = "JetBrainsMono Nerd Font"
 font-synthetic-style = bold
-font-size = 13
+# font-size = 13
 copy-on-select = clipboard
 confirm-close-surface = false
 quit-after-last-window-closed = true
@@ -19,5 +19,3 @@ window-padding-x = 15
 window-padding-y = 15
 macos-option-as-alt = true
 window-show-tab-bar = never
-keybind = ctrl+v=paste_from_clipboard
-

@@ -255,7 +255,7 @@ hl.config({
         follow_mouse = 0,
 
         sensitivity = -0.5, -- -1.0 - 1.0, 0 means no modification.
-        scroll_factor = 3,
+        scroll_factor = 2,
 
         touchpad = {
             natural_scroll = false,
@@ -288,7 +288,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 --- MacOS bindings
 
-local keys = { "C", "V", "Z", "X", "F", "R", "W", "T", "G", "SHIFT + T" }
+local keys = { "Z", "X", "F", "R", "W", "T", "G", "SHIFT + T" }
 
 -- for _, key in ipairs(keys) do
 --   hl.bind(mainMod .. " + " .. key, hl.dsp.send_shortcut({ mods = "CTRL", key = key }))
@@ -311,6 +311,8 @@ for _, key in ipairs(keys) do
 end
 
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + V", hl.dsp.send_shortcut({ mods = "SHIFT", key = "INSERT" }))
+hl.bind(mainMod .. " + C", hl.dsp.send_shortcut({ mods = "CTRL", key = "INSERT" }))
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + grave", hl.dsp.exec_cmd(terminal))
@@ -330,8 +332,8 @@ hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + CTRL + [0-9]
-for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
+for i = 1, 5 do
+    local key = i -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mainMod .. " + CTRL + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
