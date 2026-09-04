@@ -15,6 +15,8 @@ elif [[ $(uname -a | awk '{print $1}') == 'Darwin' ]]; then
   export XDG_CACHE_HOME="$HOME/Library/Caches"
 fi
 
+export ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh/.zcompdump-$HOST
+
 [[ -d "$XDG_BIN_HOME" ]] || mkdir -p "$XDG_BIN_HOME"
 [[ -d "$XDG_RUNTIME_DIR" ]] || mkdir -p "$XDG_RUNTIME_DIR"
 [[ -d "$XDG_STATE_HOME/zsh" ]] || mkdir -p "$XDG_STATE_HOME/zsh"

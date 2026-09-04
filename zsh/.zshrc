@@ -14,7 +14,8 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 setopt globdots
 
-autoload -Uz compinit
+autoload -Uz compinit promptinit
+promptinit
 
 # =========================================================
 # Completion
