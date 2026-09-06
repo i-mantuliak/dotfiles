@@ -26,7 +26,7 @@ hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
-    scale    = "auto",
+    scale    = "1.33",
 })
 
 
@@ -67,8 +67,8 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("QT_SCALE_FACTOR", "1.5")
-hl.env("GDK_SCALE", "1.5")
+hl.env("QT_SCALE_FACTOR", "1")
+hl.env("GDK_SCALE", "1")
 
 
 -----------------------
@@ -325,10 +325,10 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+-- hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
+-- hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+-- hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
+-- hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + CTRL + [0-9]

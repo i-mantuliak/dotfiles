@@ -4,7 +4,7 @@ vim.g.maplocalleader = ' '
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-vim.wo.number = true            -- Make line numbers default (default: false)
+vim.o.number = true             -- Make line numbers default (default: false)
 vim.o.relativenumber = true     -- Set relative numbered lines (default: false)
 vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. (default: '')
 vim.o.wrap = true               -- Display lines as one long line (default: true)
@@ -50,11 +50,14 @@ vim.pack.add({
   { src = 'https://github.com/karb94/neoscroll.nvim' },
 
   { src = 'https://github.com/lewis6991/gitsigns.nvim', },
+  { src = 'https://github.com/esmuellert/codediff.nvim', },
+  { src = 'https://github.com/NeogitOrg/neogit', },
 
   { src = 'https://github.com/nvim-mini/mini.surround', },
   { src = 'https://github.com/nvim-mini/mini.move', },
   { src = 'https://github.com/nvim-mini/mini.indentscope', },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim', },
+  { src = 'https://github.com/windwp/nvim-autopairs', },
 
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
@@ -64,6 +67,7 @@ require('mini.surround').setup()
 require('mini.move').setup()
 require('mini.indentscope').setup()
 
+require("nvim-autopairs").setup()
 require("neoscroll").setup({ duration_multiplier = 0.6, })
 require('bufferline').setup()
 require('lualine').setup()
@@ -225,15 +229,8 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
 -------------- gitsigns ---------------
 ---------------------------------------
 require('gitsigns').setup {
-  signs      = {
-    add = { text = '+' },
-    change = { text = '~' },
-    delete = { text = '_' },
-    topdelete = { text = '‾' },
-    changedelete = { text = '~' },
-  },
-  signcolumn = false,   -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = true,    -- Toggle with `:Gitsigns toggle_numhl`
+  signcolumn = false,
+  numhl      = true,
   on_attach  = function(bufnr)
     local gitsigns = require('gitsigns')
 
@@ -264,15 +261,6 @@ require('gitsigns').setup {
     -- Actions
     map('n', '<leader>hs', gitsigns.stage_hunk, 'Stage hunk')
     map('n', '<leader>hr', gitsigns.reset_hunk, 'Reset hunk')
-
-    map('v', '<leader>hs', function()
-      gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-    end, 'Stage selected hunk')
-
-    map('v', '<leader>hr', function()
-      gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-    end, 'Reset selected hunk')
-
     map('n', '<leader>hS', gitsigns.stage_buffer, 'Stage buffer')
     map('n', '<leader>hR', gitsigns.reset_buffer, 'Reset buffer')
     map('n', '<leader>hp', gitsigns.preview_hunk, 'Preview hunk')
@@ -287,19 +275,6 @@ require('gitsigns').setup {
     map('n', '<leader>hD', function()
       gitsigns.diffthis('~')
     end, 'Diff against last commit')
-
-    map('n', '<leader>hQ', function()
-      gitsigns.setqflist('all')
-    end, 'Send all hunks to quickfix')
-
-    map('n', '<leader>hq', gitsigns.setqflist, 'Send hunks to quickfix')
-
-    -- Toggles
-    map('n', '<leader>tb', gitsigns.toggle_current_line_blame, 'Toggle line blame')
-    map('n', '<leader>tw', gitsigns.toggle_word_diff, 'Toggle word diff')
-
-    -- Text object
-    map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, 'Select hunk')
   end
 }
 
@@ -325,7 +300,8 @@ map('n', '<leader>lr', ':FzfLua lsp_references<CR>', "Search references")
 map('n', '<leader>ld', ':FzfLua lsp_definitions<CR>', "Search definitions")
 map('n', '<leader>lD', ':FzfLua diagnostics_document<CR>', "Search diagnostics")
 map('n', '<leader>ss', ':FzfLua blines<CR>', "Search in file")
-
+-- Neogit
+map('n', '<leader>gg', "<cmd>Neogit<cr>", "Open Neogit")
 -- Buffers
 map('n', '<Tab>', ':bnext<CR>', "Next buffer")
 map('n', '<S-Tab>', ':bprevious<CR>', "Previous buffer")
