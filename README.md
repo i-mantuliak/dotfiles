@@ -40,7 +40,7 @@ ln -s ~/github/dotfiles/aerospace ~/.config/aerospace
 ## arch
 ```shell
 sudo systemctl enable --now fstrim.timer
-pacman -S npm fzf tree-sitter-cli ttf-jetbrains-mono-nerd zip unzip tig ripgrep htop neovim eza jq yq tmux alacritty iwd less amd-ucode wireplumber openssh qt6-wayland qt5-wayland hyprpolkitagent impala bluetui wiremix
+pacman -S alacritty amd-ucode base base-devel bat bitwarden bluetui cmake eza fd fzf ghostty git gnome-keyring htop hyprland hyprlauncher hyprpolkitagent impala iotop iwd jq less lsof neovim npm openssh qt5-wayland qt6-wayland ripgrep tldr tmux tree-sitter-cli ttf-jetbrains-mono-nerd unzip wget wiremix wireplumber yq zip zsh 
 ```
 
 yay
