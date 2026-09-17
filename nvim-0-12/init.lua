@@ -32,12 +32,13 @@ vim.o.winborder = "rounded"
 vim.o.termguicolors = true
 
 vim.pack.add({
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", build = ":TSUpdate", },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter",           build = ":TSUpdate", },
 
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/mason-org/mason-lspconfig.nvim', },
   { src = 'https://github.com/mason-org/mason.nvim', },
-  { src = 'https://github.com/saghen/blink.cmp',                version = "v1", },
+  { src = 'https://github.com/saghen/blink.cmp',                          version = "v1", },
+  { src = 'https://github.com/rachartier/tiny-inline-diagnostic.nvim', },
 
   { src = 'https://github.com/folke/which-key.nvim', },
 
@@ -58,6 +59,7 @@ vim.pack.add({
   { src = 'https://github.com/nvim-mini/mini.indentscope', },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim', },
   { src = 'https://github.com/windwp/nvim-autopairs', },
+  { src = 'https://github.com/wansmer/treesj', },
 
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
@@ -66,13 +68,51 @@ vim.pack.add({
 require('mini.surround').setup()
 require('mini.move').setup()
 require('mini.indentscope').setup()
-
 require("nvim-autopairs").setup()
 require("neoscroll").setup({ duration_multiplier = 0.6, })
 require('bufferline').setup()
 require('lualine').setup()
 require("nvim-autopairs").setup()
 
+---------------------------------------
+------------ Treesj --------------
+---------------------------------------
+require("treesj").setup({
+  use_default_keymaps = false,
+})
+vim.keymap.set('n', '<leader>m', require('treesj').toggle, { desc = 'Split/Join codeblock' })
+vim.keymap.set('n', '<leader>M', function()
+  require('treesj').toggle({ split = { recursive = true } })
+end, { desc = 'Split/Join codeblock recursively' })
+
+---------------------------------------
+------------ Diagnostics --------------
+---------------------------------------
+vim.o.cmdheight = 0
+vim.diagnostic.config({
+  underline = true,
+  virtual_text = false,
+  update_in_insert = false,
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+  },
+})
+
+require("tiny-inline-diagnostic").setup({
+  preset = "simple",
+  transparent_cursorline = false,
+  options = {
+    multilines = {
+      enabled = true,
+    },
+  },
+})
 
 ---------------------------------------
 -------------- oil.nvim ---------------
