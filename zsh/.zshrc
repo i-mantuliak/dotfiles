@@ -2,6 +2,7 @@
 # History
 # =========================================================
 
+[[ -d "$XDG_STATE_HOME/zsh" ]] || mkdir "$XDG_STATE_HOME/zsh"
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 HISTSIZE=100000
 SAVEHIST=100000
@@ -38,8 +39,8 @@ fi
 alias lg="lazygit"
 
 if command -v eza > /dev/null 2>&1; then
-    alias ls="eza --icons"
-    alias ll="eza -lah --icons --git"
+    alias ls="eza --icons=auto"
+    alias ll="eza -lah --icons=auto --git"
     alias tree="eza --tree --icons"
 else
     alias ll='ls -lah'
@@ -73,6 +74,8 @@ bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search

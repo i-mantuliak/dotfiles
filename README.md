@@ -40,11 +40,11 @@ ln -s ~/github/dotfiles/aerospace ~/.config/aerospace
 ## arch
 ```shell
 sudo systemctl enable --now fstrim.timer
-pacman -S alacritty amd-ucode base base-devel bat bitwarden bluetui cmake eza fd fzf ghostty git gnome-keyring htop hyprland hyprlauncher hyprpolkitagent impala iotop iwd jq less lsof neovim npm openssh qt5-wayland qt6-wayland ripgrep tldr tmux tree-sitter-cli ttf-jetbrains-mono-nerd unzip wget wiremix wireplumber yq zip zsh 
+pacman -S alacritty amd-ucode base base-devel bat cmake ddcutil eza fd fzf git htop hyprpolkitagent impala iotop jq less lsof neovim noto-fonts npm openssh ripgrep tldr tmux tree-sitter-cli ttf-jetbrains-mono-nerd unzip wget wl-clipboard wl-clip-persist yq zip zsh 
 ```
 
 yay
 ```
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
-yay -S brave-bin
+yay -S brave-origin-bin
 ```
